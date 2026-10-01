@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Upload, FileText, CheckCircle2, XCircle, Loader2 } from 'lucide-react';
 import { api } from '@/lib/api';
@@ -11,6 +11,13 @@ export default function UploadPage() {
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const router = useRouter();
+
+  useEffect(() => {
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    if (!token) {
+      router.push('/login');
+    }
+  }, [router]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -73,7 +80,7 @@ export default function UploadPage() {
                   accept=".pdf,.docx"
                   onChange={handleFileChange}
                 />
-              </span >
+              </label>
             </div>
             <p className="text-xs text-slate-400">PDF or DOCX only. Max file size 5MB.</p>
           </div>

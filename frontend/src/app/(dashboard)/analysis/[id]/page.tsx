@@ -205,7 +205,7 @@ export default function AnalysisPage() {
           setSelectedBullet(null);
           setRewriteResult(null);
         }}
-        originalText={selected,bullet || ''}
+        originalText={selectedBullet || ''}
         suggestedText={rewriteResult?.suggested_text}
         reasoning={rewriteResult?.reasoning}
         missingInfo={rewriteResult?.missing_info}

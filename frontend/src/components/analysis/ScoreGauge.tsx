@@ -3,7 +3,7 @@ import React from 'react';
 interface ScoreGaugeProps {
   score: number;
   label: string;
-  maxScore: number;
+  maxScore?: number;
 }
 
 export default function ScoreGauge({ score, label, maxScore = 100 }: ScoreGaugeProps) {
